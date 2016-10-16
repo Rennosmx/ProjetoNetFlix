@@ -5,6 +5,8 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import model.Usuario;
+import persistence.UsuarioRepository;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -94,7 +96,10 @@ public class LoginView extends Application {
 	}
 
 	protected void logar() {
-		if (txLogin.getText().equals("admin") && txSenha.getText().equals("123")) {			
+		UsuarioRepository usuarioRepository = new UsuarioRepository();
+		Usuario usuario = usuarioRepository.buscar(txLogin.getText());
+		
+		if (usuario != null && txSenha.getText().equals(usuario.getSenha())) {			
 			try {
 				// TODO new HomeView().start(new Stage());
 				LoginView.getStage().close();
