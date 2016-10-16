@@ -1,4 +1,4 @@
-package application;
+package view;
 	
 import javax.swing.JOptionPane;
 import javafx.application.Application;
@@ -27,9 +27,9 @@ public class LoginView extends Application {
 			initListeners();
 			Scene scene = new Scene(pane);
 			stage.setScene(scene);
-			scene.getStylesheets().add("file:resources/css/login.css");
 			stage.setResizable(false);
 			stage.setTitle("Login - Netfx");
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.show();
 			initLayout();
 			LoginView.stage = stage;
