@@ -2,9 +2,12 @@ package view;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Usuario;
 
 
 public class Main extends Application {
+	private static Usuario usuarioLogado;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -16,5 +19,13 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public static Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public static void setUsuarioLogado(Usuario usuarioLogado) {
+		Main.usuarioLogado = usuarioLogado;
 	}
 }

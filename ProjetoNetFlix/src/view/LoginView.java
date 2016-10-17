@@ -9,6 +9,7 @@ import model.Usuario;
 import persistence.UsuarioRepository;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +20,7 @@ public class LoginView extends Application {
 	private TextField txLogin;
 	private PasswordField txSenha;
 	private Button btEntrar;
-	private Button btSair;
+	private Hyperlink linkCriarConta;
 	private static Stage stage;
 	
 	@Override
@@ -49,16 +50,16 @@ public class LoginView extends Application {
 		pane = new AnchorPane();
 		pane.setPrefSize(400, 300);
 		txLogin = new TextField();
-		txLogin.setPromptText("Digite seu login...");
+		txLogin.setPromptText("Digite seu email...");
 		txSenha = new PasswordField();
 		txSenha.setPromptText("Digite sua senha...");
 		
 		btEntrar = new Button();
 		btEntrar.setText("Entrar");
-		btSair = new Button();
-		btSair.setText("Sair");
+		linkCriarConta = new Hyperlink();
+		linkCriarConta.setText("Criar uma conta");
 		
-		pane.getChildren().addAll(txLogin, txSenha, btEntrar, btSair);
+		pane.getChildren().addAll(txLogin, txSenha, btEntrar, linkCriarConta);
 	}
 	
 	private void initLayout() {
@@ -71,11 +72,10 @@ public class LoginView extends Application {
 		btEntrar.setLayoutX( (pane.getWidth() - btEntrar.getWidth()) / 2.0 );
 		btEntrar.setLayoutY(150);
 		
-		btSair.setLayoutX( (pane.getWidth() - btSair.getWidth()) / 2.0 );
-		btSair.setLayoutY(200);	
-		
+		linkCriarConta.setLayoutX( (pane.getWidth() - linkCriarConta.getWidth()) / 2.0 );
+		linkCriarConta.setLayoutY(200);
+
 		btEntrar.getStyleClass().addAll("btEntrar");
-		btSair.getStyleClass().addAll("btSair");
 		pane.getStyleClass().add("pane");				
 	}
 	
@@ -87,21 +87,27 @@ public class LoginView extends Application {
 			}
 		});
 		
-		btSair.setOnAction(new EventHandler<ActionEvent>() {			
+		linkCriarConta.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				fecharAplicacao();				
+				try {
+					new CadastroView().start(new Stage());
+					getStage().close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}							
 			}
-		});
+		});	
 	}
 
 	protected void logar() {
 		UsuarioRepository usuarioRepository = new UsuarioRepository();
 		Usuario usuario = usuarioRepository.buscar(txLogin.getText());
 		
-		if (usuario != null && txSenha.getText().equals(usuario.getSenha())) {			
+		if (usuario != null && txSenha.getText().equals(usuario.getSenha())) {
+			Main.setUsuarioLogado(usuario);
 			try {
-				// TODO new HomeView().start(new Stage());
+				new HomeView().start(new Stage());
 				LoginView.getStage().close();
 			} catch (Exception e) {
 				e.printStackTrace();
