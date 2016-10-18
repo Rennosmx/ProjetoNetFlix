@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import model.LoginApp;
+import model.MainApp;
 
 public class TelaInicialController {
 
-	private LoginApp loginApp;
+	private MainApp loginApp;
 	
 	@FXML
 	private Text nomeUsuario;
@@ -29,7 +29,7 @@ public class TelaInicialController {
 		emailUsuario = new Text(Main.getUsuarioLogado().getEmail());						
 	}
 
-	public void setMainApp(LoginApp loginApp) {
+	public void setMainApp(MainApp loginApp) {
         this.loginApp = loginApp;    
     }
 	

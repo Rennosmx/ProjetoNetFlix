@@ -13,7 +13,7 @@ import view.TelaCadastroController;
 import view.TelaInicialController;
 import view.TelaLoginController;
 
-public class LoginApp extends Application {
+public class MainApp extends Application {
 
 	 private Stage primaryStage;
 	 private Pane telaLogin, telaCadastro, telaInicial;
@@ -31,7 +31,7 @@ public class LoginApp extends Application {
 		try {
 			 // Carrega a tela de login
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(LoginApp.class.getResource("/view/TelaLogin.fxml"));					
+			loader.setLocation(MainApp.class.getResource("/view/TelaLogin.fxml"));					
 			telaLogin = (Pane) loader.load();
 			
 			Scene scene = new Scene(telaLogin);
@@ -52,7 +52,7 @@ public class LoginApp extends Application {
 		try {
 			 // Carrega a tela de cadastro
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(LoginApp.class.getResource("/view/TelaCadastro.fxml"));					
+			loader.setLocation(MainApp.class.getResource("/view/TelaCadastro.fxml"));					
 			telaCadastro = (Pane) loader.load();
 			
 			Scene scene = new Scene(telaCadastro);
@@ -73,7 +73,7 @@ public class LoginApp extends Application {
 		try {
 			 // Carrega a tela inicial
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(LoginApp.class.getResource("/view/TelaInicial.fxml"));					
+			loader.setLocation(MainApp.class.getResource("/view/TelaInicial.fxml"));					
 			telaInicial = (Pane) loader.load();
 			
 			Scene scene = new Scene(telaInicial);

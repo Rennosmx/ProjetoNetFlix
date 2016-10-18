@@ -5,13 +5,13 @@ import javax.swing.JOptionPane;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.LoginApp;
+import model.MainApp;
 import model.Usuario;
 import persistence.UsuarioRepository;
 
 public class TelaLoginController {
 		
-	private LoginApp loginApp;
+	private MainApp loginApp;
 	
 	@FXML
 	private TextField txEmail;
@@ -45,7 +45,7 @@ public class TelaLoginController {
 		
 	}
 
-	public void setMainApp(LoginApp loginApp) {
+	public void setMainApp(MainApp loginApp) {
         this.loginApp = loginApp;    
     }
 	
