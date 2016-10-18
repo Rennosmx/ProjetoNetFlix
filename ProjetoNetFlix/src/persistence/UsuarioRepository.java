@@ -14,7 +14,7 @@ public class UsuarioRepository {
 	private String driver = "org.postgresql.Driver";
 	private String url = "jdbc:postgresql://localhost/postgres";
 	private String user = "postgres";
-	private String password = "postgres";
+	private String password = "cativeiro";
 	private Connection conn;
 
 	public UsuarioRepository() {
