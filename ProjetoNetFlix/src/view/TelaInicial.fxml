@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialController">
    <children>
       <Pane prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,7 +16,7 @@
             <Text fx:id="nomeUsuario" layoutX="100.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="146.0" />
             <Text fx:id="idadeUsuario" layoutX="176.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="146.0" />
             <Text fx:id="emailUsuario" layoutX="82.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="146.0" />
-            <Button layoutX="182.0" layoutY="227.0" mnemonicParsing="false" text="Sair" />
+            <Button fx:id="btnSair" layoutX="182.0" layoutY="227.0" mnemonicParsing="false" text="Sair" />
          </children>
       </Pane>
    </children>
