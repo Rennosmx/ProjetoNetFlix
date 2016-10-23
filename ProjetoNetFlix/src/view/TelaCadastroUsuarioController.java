@@ -12,7 +12,7 @@ import model.MainApp;
 import model.Usuario;
 import persistence.UsuarioRepository;
 
-public class TelaCadastroController {
+public class TelaCadastroUsuarioController {
 
 			
 	private MainApp loginApp;

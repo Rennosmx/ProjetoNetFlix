@@ -9,19 +9,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.TelaCadastroController;
-import view.TelaInicialController;
+import view.TelaCadastroFilmeController;
+import view.TelaCadastroUsuarioController;
+import view.TelaHomeController;
 import view.TelaLoginController;
 
 public class MainApp extends Application {
 
-	 private Stage primaryStage;
+	private static Usuario usuarioLogado;
+	private Stage primaryStage;
 	 private Pane telaLogin, telaCadastro, telaInicial;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Exemplo Netflix");
+        this.primaryStage.setTitle("Netfx");
         
         mostraTelaLogin();
 	}
@@ -47,19 +49,19 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public void mostraTelaCadastro(){
+	public void mostraTelaCadastroFilme() {
 		
 		try {
 			 // Carrega a tela de cadastro
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/TelaCadastro.fxml"));					
+			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroFilme.fxml"));					
 			telaCadastro = (Pane) loader.load();
 			
 			Scene scene = new Scene(telaCadastro);
             primaryStage.setScene(scene);
             primaryStage.show();
 			                      
-            TelaCadastroController controller = loader.getController();
+            TelaCadastroFilmeController controller = loader.getController();
             controller.setMainApp(this);
             
             
@@ -68,19 +70,40 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public void mostraTelaInicial(){
+	public void mostraTelaCadastroUsuario(){
+		
+		try {
+			 // Carrega a tela de cadastro
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroUsuario.fxml"));					
+			telaCadastro = (Pane) loader.load();
+			
+			Scene scene = new Scene(telaCadastro);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+			                      
+            TelaCadastroUsuarioController controller = loader.getController();
+            controller.setMainApp(this);
+            
+            
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void mostraTelaHome(){
 		
 		try {
 			 // Carrega a tela inicial
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/view/TelaInicial.fxml"));					
+			loader.setLocation(MainApp.class.getResource("/view/TelaHome.fxml"));					
 			telaInicial = (Pane) loader.load();
 			
 			Scene scene = new Scene(telaInicial);
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            TelaInicialController controller = loader.getController();
+            TelaHomeController controller = loader.getController();
             controller.setMainApp(this);
 			                      
             
@@ -95,5 +118,13 @@ public class MainApp extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public static void setUsuarioLogado(Usuario usuarioLogado) {
+		MainApp.usuarioLogado = usuarioLogado;
 	}
 }

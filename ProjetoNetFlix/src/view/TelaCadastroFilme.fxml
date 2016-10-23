@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="332.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaCadastroFilmeController">
+   <children>
+      <Pane prefHeight="332.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="30.0" layoutY="30.0" prefHeight="14.0" prefWidth="35.0" text="Título*:" />
+            <Label layoutX="30.0" layoutY="64.0" text="Ano*:" />
+            <Label layoutX="29.0" layoutY="96.0" prefHeight="14.0" prefWidth="113.0" text="Duração (minutos)*:" />
+            <TextField fx:id="tituloTF" layoutX="75.0" layoutY="26.0" prefHeight="22.0" prefWidth="145.0" />
+            <TextField fx:id="duracaoTF" layoutX="130.0" layoutY="92.0" prefHeight="22.0" prefWidth="89.0" />
+            <Button layoutX="126.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnFinalizarCadastro" text="Cadastrar" />
+            <Button layoutX="205.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnCancelarCadastro" text="Cancelar" />
+            <ImageView fitHeight="182.0" fitWidth="152.0" layoutX="235.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="anoTF" layoutX="62.0" layoutY="60.0" prefHeight="22.0" prefWidth="158.0" />
+            <Button layoutX="235.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleSelectArquivoCapa" text="Adicionar capa..." />
+            <Label layoutX="31.0" layoutY="127.0" prefHeight="14.0" prefWidth="52.0" text="Gênero*:" />
+            <Label layoutX="30.0" layoutY="159.0" prefHeight="14.0" prefWidth="80.0" text="Ator principal*:" />
+            <TextField fx:id="atorPrincipalTF" layoutX="114.0" layoutY="155.0" prefHeight="22.0" prefWidth="105.0" />
+            <ComboBox fx:id="generoCB" layoutX="88.0" layoutY="123.0" prefHeight="22.0" prefWidth="130.0" />
+            <Button layoutX="193.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleSelectArquivoMidia" text="..." />
+            <TextField fx:id="arquivoMidiaTF" layoutX="20.0" layoutY="232.0" prefHeight="22.0" prefWidth="171.0" promptText="Arquivo de mídia" />
+            <TextField fx:id="idadeTF" layoutX="120.0" layoutY="187.0" prefHeight="22.0" prefWidth="98.0" />
+            <Label layoutX="31.0" layoutY="191.0" text="Idade indicativa:" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

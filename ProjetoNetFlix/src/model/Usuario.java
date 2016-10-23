@@ -8,7 +8,14 @@ public class Usuario {
 	private Date dataNascimento;
 	private String email;	
 	private String senha;
+	private boolean isAdmin;
 	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	public String getNome() {
 		return nome;
 	}

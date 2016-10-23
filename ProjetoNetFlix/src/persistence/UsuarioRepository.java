@@ -37,11 +37,11 @@ public class UsuarioRepository {
         Usuario usuario = null;
         
         // query que será executada
-        String sql = "SELECT id, nome, nascimento, email, senha FROM usuario"
+        String sql = "SELECT * FROM usuario"
         		+ " WHERE email=?";
 
         try {
-            // executa a query e guarda o resultado no RecordSet rs
+            // executa a query e guarda o resultado no ResultSet rs
         	
             stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, email);
@@ -54,6 +54,7 @@ public class UsuarioRepository {
             	usuario.setDataNascimento(rs.getDate("nascimento"));
             	usuario.setEmail(rs.getString("email")); 
             	usuario.setSenha(rs.getString("senha"));
+            	usuario.setAdmin(rs.getBoolean("is_admin"));
             }
             
         } catch(SQLException e){
@@ -79,8 +80,8 @@ public class UsuarioRepository {
 	public void incluir(Usuario usuario) {
 		PreparedStatement stmt = null;
 		// query que será executada
-		String sql = "INSERT INTO usuario (nome, nascimento, email, senha)"
-				+ " VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO usuario (nome, nascimento, email, senha, is_admin)"
+				+ " VALUES (?, ?, ?, ?, FALSE)";
 		try {
 			stmt = this.conn.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());

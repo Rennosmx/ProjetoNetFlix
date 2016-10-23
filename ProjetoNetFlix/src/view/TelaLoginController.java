@@ -22,7 +22,7 @@ public class TelaLoginController {
 	
 	@FXML
 	private void linkCadastrar(){
-		loginApp.mostraTelaCadastro();
+		loginApp.mostraTelaCadastroUsuario();
 	}
 	
 	@FXML
@@ -32,9 +32,9 @@ public class TelaLoginController {
 		Usuario usuario = usuarioRepository.buscar(txEmail.getText());
 						
 		if (usuario != null && txSenha.getText().equals(usuario.getSenha())) {
-			Main.setUsuarioLogado(usuario);
+			MainApp.setUsuarioLogado(usuario);
 			try {
-				loginApp.mostraTelaInicial();				
+				loginApp.mostraTelaHome();				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
