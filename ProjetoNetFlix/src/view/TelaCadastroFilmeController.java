@@ -81,7 +81,7 @@ public class TelaCadastroFilmeController {
 			return;
 		}
 		
-		if (anoTF.getText() == null ) {
+		if (anoTF.getText() == null || anoTF.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Informe um ano!", 
 					"Erro", JOptionPane.ERROR_MESSAGE);
 			return;		
@@ -97,7 +97,7 @@ public class TelaCadastroFilmeController {
 			JOptionPane.showMessageDialog(null, "Informe um gênero!", 
 					"Erro", JOptionPane.ERROR_MESSAGE);
 			return;			
-		}
+		}	
 		
 		if (arquivoMidiaTF.getText() == null) {
 			JOptionPane.showMessageDialog(null, "Informe um arquivo de mídia!", 
@@ -117,9 +117,10 @@ public class TelaCadastroFilmeController {
 		filme.setDuracao(Integer.parseInt(duracaoTF.getText()));
 		filme.setGenero(generoCB.getValue());
 		filme.setAtorPrincipal(atorPrincipalTF.getText());
+		filme.setIdade(Integer.parseInt(idadeTF.getText()));
 		filme.setArquivoCapa(arquivoCapa);
 		filme.setArquivoMidia(arquivoMidiaTF.getText());
-
+		
 		FilmeRepository filmeRepository = new FilmeRepository();
 		filmeRepository.editarIncluir(filme);
 		
@@ -127,7 +128,7 @@ public class TelaCadastroFilmeController {
 				"Cadastro", JOptionPane.INFORMATION_MESSAGE);		
 		
 		try {
-			mainApp.mostraTelaLogin();
+			mainApp.mostraTelaHome();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
