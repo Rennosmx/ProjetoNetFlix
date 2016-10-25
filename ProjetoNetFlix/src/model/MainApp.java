@@ -12,13 +12,14 @@ import javafx.stage.Stage;
 import view.TelaCadastroFilmeController;
 import view.TelaCadastroUsuarioController;
 import view.TelaHomeController;
+import view.TelaInformacoesFilmeController;
 import view.TelaLoginController;
 
 public class MainApp extends Application {
 
 	private static Usuario usuarioLogado;
 	private Stage primaryStage;
-	 private Pane telaLogin, telaCadastro, telaInicial;
+	 private Pane telaLogin, telaCadastro, telaInicial, telaInfoFilmes;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -52,7 +53,7 @@ public class MainApp extends Application {
 	public void mostraTelaCadastroFilme() {
 		
 		try {
-			 // Carrega a tela de cadastro
+			 // Carrega a tela de cadastro de filme
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroFilme.fxml"));					
 			telaCadastro = (Pane) loader.load();
@@ -73,7 +74,7 @@ public class MainApp extends Application {
 	public void mostraTelaCadastroUsuario(){
 		
 		try {
-			 // Carrega a tela de cadastro
+			 // Carrega a tela de cadastro de usuario
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroUsuario.fxml"));					
 			telaCadastro = (Pane) loader.load();
@@ -111,6 +112,28 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void mostraTelaInformacoesFilme(){
+		
+		try {
+			 // Carrega a tela com detalhes do filme selecionado
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/TelaInformacoesFilme.fxml"));					
+			telaInfoFilmes = (Pane) loader.load();
+			
+			Scene scene = new Scene(telaInfoFilmes);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            TelaInformacoesFilmeController controller = loader.getController();
+            controller.setMainApp(this);
+			                      
+            
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;
