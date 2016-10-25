@@ -2,6 +2,7 @@ package view;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
+import model.Filme;
 import model.MainApp;
 import persistence.FilmeRepository;
 
@@ -31,9 +33,10 @@ public class TelaHomeController {
 	@FXML
 	private TilePane filmesTP;
 	
+	private List<Filme> filmes;
 	
 	public TelaHomeController() {
-									
+					
 	}
 	
     /**
@@ -43,11 +46,30 @@ public class TelaHomeController {
     @FXML
     private void initialize() {
 		usuarioLogadoTX.setText(MainApp.getUsuarioLogado().getNome());
-		
 		novoFilmeBT.setVisible(MainApp.getUsuarioLogado().isAdmin());
-	
+		FilmeRepository filmeRepository = new FilmeRepository();
+		
+		filmes = filmeRepository.buscarTudo();
+		updateFilmeTiles();
+		
     }	
 
+    private void updateFilmeTiles() {
+    	filmesTP.getChildren().clear();
+    	for (Filme filme : filmes) {
+	        try {
+	        	FXMLLoader loader = new FXMLLoader();
+		        loader.setLocation(MainApp.class.getResource("/view/FilmeLayout.fxml"));
+				Pane tile = loader.load();
+				FilmeLayoutController controller = loader.<FilmeLayoutController>getController();
+		        controller.initData(filme);
+				filmesTP.getChildren().add(tile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
+		}
+    }
+    
 	public void setMainApp(MainApp loginApp) {
         this.loginApp = loginApp;    
     }
@@ -59,31 +81,15 @@ public class TelaHomeController {
 	}
 	
 	@FXML
-	private void handleNovoFilme(){
+	private void handleNovoFilme() {
 		loginApp.mostraTelaCadastroFilme();
 	}
 	
 	@FXML
-	private void handleBuscarFilme(){
-		
-	     FXMLLoader loader;
-	        try {
-				loader = new FXMLLoader();
-		        loader.setLocation(MainApp.class.getResource("/view/FilmeLayout.fxml"));
-				Pane panel = loader.load();
-				FilmeLayoutController controller = loader.<FilmeLayoutController>getController();
-		        controller.initData("Filme A", 1999, 90);
-				filmesTP.getChildren().add(panel);
-				
-				loader = new FXMLLoader();
-		        loader.setLocation(MainApp.class.getResource("/view/FilmeLayout.fxml"));
-				filmesTP.getChildren().add(loader.load());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-		
-		//FilmeRepository filmeRepository = new FilmeRepository();
-		//filmesGP.add
+	private void handleBuscarFilme() {
+		FilmeRepository filmeRepository = new FilmeRepository();
+		filmes = filmeRepository.buscarPorTituloLikeOuAtorPrincipalLike(
+				buscaTF.getText(), buscaTF.getText());
+		updateFilmeTiles();	
 	}	
 }

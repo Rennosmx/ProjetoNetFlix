@@ -66,6 +66,36 @@ public class FilmeRepository extends GenericRepository {
         return filme;
 	}
 	
+	public List<Filme> buscarTudo() {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Filme> filmes = null;
+        
+        // query que será executada
+        String sql = "SELECT * FROM filme";
+
+        try {
+            // executa a query e guarda o resultado no RecordSet rs
+        	
+            stmt = this.conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+        	filmes = fillFromResultSet(rs);
+
+        } catch(SQLException e){
+            System.out.println("Erro ao buscar filme: " + e.getMessage());
+        } finally {
+            try {
+                // fecha o stmt e o rs
+                if (stmt != null) stmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e){
+                System.out.println("Erro ao tentar fechar o stmt e o rs: " + e.getMessage());
+            }
+        }
+        
+        return filmes;
+	}	
 
 	public List<Filme> buscarPorTituloLikeOuAtorPrincipalLike(String titulo, String atorPrincipal) {
         PreparedStatement stmt = null;

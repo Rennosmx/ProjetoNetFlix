@@ -3,7 +3,9 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.Filme;
 import model.MainApp;
 
 public class FilmeLayoutController {
@@ -35,9 +37,11 @@ public class FilmeLayoutController {
         this.mainApp = mainApp;    
     }
 	
-	public void initData(String a, int b, int c) {
-		tituloLB.setText(a);
-		anoLB.setText(b + "");
-		duracaoLB.setText(c + "");
-	}
+	public void initData(Filme filme) {
+		tituloLB.setText(filme.getTitulo());
+		anoLB.setText(filme.getAno() + "");
+		duracaoLB.setText(filme.getDuracao() + "");
+		Image img = new Image("file:" + filme.getArquivoCapa());
+        capaIV.setImage(img);	
+    }
 }

@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FilmeLayoutController">
+<AnchorPane prefHeight="207.0" prefWidth="151.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FilmeLayoutController">
    <children>
-      <Pane layoutY="15.0" prefHeight="207.0" prefWidth="156.0" style="-fx-background-color: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutY="15.0" prefHeight="207.0" prefWidth="151.0" style="-fx-background-color: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="capaIV" fitHeight="152.0" fitWidth="130.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="capaIV" fitHeight="152.0" fitWidth="120.0" layoutX="16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="tituloLB" layoutX="23.0" layoutY="166.0" prefHeight="14.0" prefWidth="130.0" text="Filme" />
             <Label fx:id="anoLB" layoutX="23.0" layoutY="186.0" prefHeight="14.0" prefWidth="28.0" text="2002" />
-            <Label fx:id="duracaoLB" layoutX="99.0" layoutY="186.0" prefHeight="14.0" prefWidth="45.0" text="294 min" />
+            <Label fx:id="duracaoLB" layoutX="96.0" layoutY="186.0" prefHeight="14.0" prefWidth="45.0" text="294 min" />
          </children>
       </Pane>
    </children>
