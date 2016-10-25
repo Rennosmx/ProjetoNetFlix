@@ -106,26 +106,26 @@ public class MainApp extends Application {
             
             TelaHomeController controller = loader.getController();
             controller.setMainApp(this);
-			                      
-            
+            controller.mostrarTodosOsFilmes();         
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void mostraTelaInformacoesFilme(){
+	public void mostraTelaInformacoesFilme(Filme filme){
 		
 		try {
 			 // Carrega a tela com detalhes do filme selecionado
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("/view/TelaInformacoesFilme.fxml"));					
 			telaInfoFilmes = (Pane) loader.load();
-			
+			TelaInformacoesFilmeController controller = loader.<TelaInformacoesFilmeController>getController();
+	        controller.initData(filme);
+	        
 			Scene scene = new Scene(telaInfoFilmes);
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            TelaInformacoesFilmeController controller = loader.getController();
             controller.setMainApp(this);
 			                      
             

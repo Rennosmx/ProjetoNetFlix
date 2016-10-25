@@ -8,8 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
@@ -19,7 +18,7 @@ import persistence.FilmeRepository;
 
 public class TelaHomeController {
 
-	private MainApp loginApp;
+	private MainApp mainApp;
 	
 	@FXML
 	private Button novoFilmeBT;
@@ -32,6 +31,9 @@ public class TelaHomeController {
 	
 	@FXML
 	private TilePane filmesTP;
+	
+	@FXML
+	private AnchorPane mainPane;	 
 	
 	private List<Filme> filmes;
 	
@@ -47,10 +49,6 @@ public class TelaHomeController {
     private void initialize() {
 		usuarioLogadoTX.setText(MainApp.getUsuarioLogado().getNome());
 		novoFilmeBT.setVisible(MainApp.getUsuarioLogado().isAdmin());
-		FilmeRepository filmeRepository = new FilmeRepository();
-		
-		filmes = filmeRepository.buscarTudo();
-		updateFilmeTiles();
 		
     }	
 
@@ -63,6 +61,7 @@ public class TelaHomeController {
 				Pane tile = loader.load();
 				FilmeLayoutController controller = loader.<FilmeLayoutController>getController();
 		        controller.initData(filme);
+	            controller.setMainApp(mainApp);
 				filmesTP.getChildren().add(tile);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -71,18 +70,18 @@ public class TelaHomeController {
     }
     
 	public void setMainApp(MainApp loginApp) {
-        this.loginApp = loginApp;    
+        this.mainApp = loginApp;    
     }
 	
 	@FXML
 	private void btnSair(){
 		MainApp.setUsuarioLogado(null);
-		loginApp.mostraTelaLogin();
+		mainApp.mostraTelaLogin();
 	}
 	
 	@FXML
 	private void handleNovoFilme() {
-		loginApp.mostraTelaCadastroFilme();
+		mainApp.mostraTelaCadastroFilme();
 	}
 	
 	@FXML
@@ -91,5 +90,12 @@ public class TelaHomeController {
 		filmes = filmeRepository.buscarPorTituloLikeOuAtorPrincipalLike(
 				buscaTF.getText(), buscaTF.getText());
 		updateFilmeTiles();	
-	}	
+	}
+	
+	@FXML
+	public void mostrarTodosOsFilmes() {
+		FilmeRepository filmeRepository = new FilmeRepository();		
+		filmes = filmeRepository.buscarTudo();
+		updateFilmeTiles();
+	}
 }

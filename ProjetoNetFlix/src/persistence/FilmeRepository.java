@@ -104,8 +104,8 @@ public class FilmeRepository extends GenericRepository {
         
         // query que será executada
         String sql = "SELECT * FROM filme"
-        		+ " WHERE LOWER(titulo) LIKE ?"
-        		+ " OR LOWER(ator_principal) LIKE ?";
+        		+ " WHERE (LOWER(titulo) LIKE ?)"
+        		+ " OR (LOWER(ator_principal) LIKE ?)";
 
         try {
             // executa a query e guarda o resultado no RecordSet rs

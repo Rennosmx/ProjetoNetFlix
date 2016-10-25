@@ -24,6 +24,8 @@ public class FilmeLayoutController {
 	@FXML
 	private ImageView capaIV;	
 	
+	private Filme filme;
+	
     /**
      * Inicializa a classe controller. Este método é chamado automaticamente
      *  após o arquivo fxml ter sido carregado.
@@ -38,10 +40,17 @@ public class FilmeLayoutController {
     }
 	
 	public void initData(Filme filme) {
+		this.filme = filme;
 		tituloLB.setText(filme.getTitulo());
 		anoLB.setText(filme.getAno() + "");
-		duracaoLB.setText(filme.getDuracao() + "");
+		duracaoLB.setText(filme.getDuracao() + "min");
 		Image img = new Image("file:" + filme.getArquivoCapa());
         capaIV.setImage(img);	
     }
+	
+	
+	@FXML
+	private void handleTelaInformacoesFilme() {
+		mainApp.mostraTelaInformacoesFilme(filme);
+	}
 }
