@@ -148,7 +148,7 @@ public class FilmeRepository extends GenericRepository {
 				+ "(titulo, genero, ano, ator_principal, idade, duracao, arquivo_capa, arquivo_midia, diretor, descricao)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		String sqlEditar = "UPDATE usuario"
+		String sqlEditar = "UPDATE filme"
 				+ " SET titulo=?, genero=?, ano=?, ator_principal=?, idade=?, duracao=?, arquivo_capa=?, arquivo_midia=?, diretor=?, descricao=?"
 				+ " WHERE id=?";
 		
@@ -172,9 +172,9 @@ public class FilmeRepository extends GenericRepository {
 			}
 			
 			stmt.executeUpdate();
-			System.out.println("Usuário editado/incluído com sucesso!");
+			System.out.println("Filme editado/incluído com sucesso!");
 		} catch(SQLException e) {
-			System.out.println("Erro ao editar/incluir usuario: " + e.getMessage());
+			System.out.println("Erro ao editar/incluir filme: " + e.getMessage());
 		} finally {
 			try {
 				if (stmt != null) stmt.close();
