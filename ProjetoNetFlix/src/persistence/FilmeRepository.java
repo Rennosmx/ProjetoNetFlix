@@ -26,6 +26,9 @@ public class FilmeRepository extends GenericRepository {
         	filme.setIdade(rs.getInt("idade"));
         	filme.setArquivoCapa(rs.getString("arquivo_capa"));
         	filme.setArquivoMidia(rs.getString("arquivo_midia"));
+        	filme.setDiretor(rs.getString("diretor"));
+        	filme.setDescricao(rs.getString("descricao"));
+
         	result.add(filme);
         }
         
@@ -142,11 +145,11 @@ public class FilmeRepository extends GenericRepository {
 		
 		// query que será executada
 		String sqlIncluir = "INSERT INTO filme "
-				+ "(titulo, genero, ano, ator_principal, idade, duracao, arquivo_capa, arquivo_midia)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(titulo, genero, ano, ator_principal, idade, duracao, arquivo_capa, arquivo_midia, diretor, descricao)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		String sqlEditar = "UPDATE usuario"
-				+ " SET titulo=?, genero=?, ano=?, ator_principal=?, idade=?, duracao=?, arquivo_capa=?, arquivo_midia=?"
+				+ " SET titulo=?, genero=?, ano=?, ator_principal=?, idade=?, duracao=?, arquivo_capa=?, arquivo_midia=?, diretor=?, descricao=?"
 				+ " WHERE id=?";
 		
 		String sql = filme.getId() == 0 ? sqlIncluir : sqlEditar;
@@ -161,6 +164,8 @@ public class FilmeRepository extends GenericRepository {
 			stmt.setInt(6, filme.getDuracao());
 			stmt.setString(7, filme.getArquivoCapa());			
 			stmt.setString(8, filme.getArquivoMidia());			
+			stmt.setString(9, filme.getDiretor());			
+			stmt.setString(10, filme.getDescricao());			
 			
 			if (filme.getId() != 0) {
 				stmt.setInt(stmt.getParameterMetaData().getParameterCount(), filme.getId());
@@ -178,5 +183,34 @@ public class FilmeRepository extends GenericRepository {
 			}
 		}	
 	}
+	
+
+	/**
+	 * Exclui uma tupla do banco de dados.
+	 * 
+	 * @param email
+	 */
+	public void excluir(int id) {		
+		PreparedStatement stmt = null;
+		
+		// query que será executada
+		String sql = "DELETE FROM filme WHERE id=?";
+
+		try {
+			stmt = this.conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			System.out.println("Excluído com sucesso!");
+		} catch(SQLException e){
+			System.out.println("Erro ao excluir: " + e.getMessage());
+		} finally {
+			try {
+				if (stmt != null) stmt.close();
+			} catch (SQLException e){
+				System.out.println("Erro ao tentar fechar o stmt: " + e.getMessage());
+			}
+		}		
+	}	
+	
 
 }

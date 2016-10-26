@@ -29,6 +29,8 @@ CREATE TABLE filme (
     duracao integer,
     ator_principal character varying(255),
     idade integer,
+    diretor text,
+    descricao text,
     arquivo_capa character varying(255),
     arquivo_midia character varying(255) 
 );

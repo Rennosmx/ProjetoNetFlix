@@ -1,35 +1,13 @@
 package persistence;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Usuario;
 
-public class UsuarioRepository {
-
-	private String driver = "org.postgresql.Driver";
-	private String url = "jdbc:postgresql://localhost/postgres";
-	private String user = "postgres";
-	private String password = "cativeiro";
-	private Connection conn;
-
-	public UsuarioRepository() {
-		// método construtor quando chamado já irá se conectar ao banco de dados
-		try {
-			Class.forName(this.driver);
-			this.conn = DriverManager.getConnection(url, user, password);
-			//this.conn.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
-			System.out.println("Não foi possivel encontrar " 
-					+ "o driver de banco: " + e.getMessage());
-		} catch(SQLException e){
-			System.out.println("Erro ao conectar com o banco: " + e.getMessage());
-		}
-	}
+public class UsuarioRepository extends GenericRepository {
 
 	public Usuario buscar(String email) {
         PreparedStatement stmt = null;
@@ -74,24 +52,37 @@ public class UsuarioRepository {
 	
 
 	/**
-	 * Inclui um usuario no banco de dados.
+	 * Edita/Inclui um usuario no banco de dados.
 	 *
 	 */
-	public void incluir(Usuario usuario) {
+	public void editarIncluir(Usuario usuario) {
 		PreparedStatement stmt = null;
 		// query que será executada
-		String sql = "INSERT INTO usuario (nome, nascimento, email, senha, is_admin)"
+		String sqlIncluir = "INSERT INTO usuario "
+				+ "(nome, nascimento, email, senha, is_admin)"
 				+ " VALUES (?, ?, ?, ?, FALSE)";
+		
+		String sqlEditar = "UPDATE usuario"
+				+ " SET nome=?, nascimento=?, email=?, senha=?"
+				+ " WHERE id=?";		
+		
+		String sql = usuario.getId() == 0 ? sqlIncluir : sqlEditar;
+		
 		try {
 			stmt = this.conn.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());
 			stmt.setDate(2, new Date(usuario.getDataNascimento().getTime()));
 			stmt.setString(3, usuario.getEmail());
 			stmt.setString(4, usuario.getSenha());
+			
+			if (usuario.getId() != 0) {
+				stmt.setInt(stmt.getParameterMetaData().getParameterCount(), usuario.getId());
+			}			
+			
 			stmt.executeUpdate();
-			System.out.println("Usuário incluído com sucesso!");
+			System.out.println("Usuário editado/incluído com sucesso!");
 		} catch(SQLException e){
-			System.out.println("Erro ao incluir usuário: " + e.getMessage());
+			System.out.println("Erro ao editar/incluir usuário: " + e.getMessage());
 		} finally {
 			try {
 				if (stmt != null) stmt.close();
@@ -127,46 +118,5 @@ public class UsuarioRepository {
 			}
 		}		
 	}
-	
-	/**
-	 * Edita um usuario do banco de dados.
-	 * 
-	 * @param usuario
-	 */
-	public void editar(Usuario usuario) {		
-		PreparedStatement stmt = null;
-		// query que será executada
-		String sql = "UPDATE usuario"
-				+ " SET nome=?,nascimento=?,email=?,senha=?"
-				+ " WHERE id=?";
-		try {
-			stmt = this.conn.prepareStatement(sql);
-			stmt.setString(1, usuario.getNome());
-			stmt.setDate(2, new Date(usuario.getDataNascimento().getTime()));
-			stmt.setString(3, usuario.getEmail());
-			stmt.setString(4, usuario.getSenha());
-			stmt.executeUpdate();
-			System.out.println("Usuário editado com sucesso!");
-		} catch(SQLException e) {
-			System.out.println("Erro ao editar usuario: " + e.getMessage());
-		} finally {
-			try {
-				if (stmt != null) stmt.close();
-			} catch (SQLException e) {
-				System.out.println("erro ao tentar fechar o stmt: " + e.getMessage());
-			}
-		}	
-	}
 
-	// desconecta do banco de dados
-	public void desconectar(){
-		try {
-			if (this.conn != null) {
-				this.conn.close();
-				this.conn = null;
-			}
-		} catch(SQLException e){
-			System.out.println("Erro tentanto fechar a conexão com o banco: " + e.getMessage());
-		}
-	}
 }

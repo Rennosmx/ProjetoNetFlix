@@ -41,8 +41,26 @@ public class Filme {
 	private int idade;
 	private String arquivoMidia;
 	private String arquivoCapa;
+	private String diretor;
+	private String descricao;
+
 	
-	
+	public String getDiretor() {
+		return diretor;
+	}
+
+	public void setDiretor(String diretor) {
+		this.diretor = diretor;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public String getArquivoMidia() {
 		return arquivoMidia;
 	}

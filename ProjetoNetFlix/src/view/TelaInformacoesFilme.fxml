@@ -14,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInformacoesFilmeController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInformacoesFilmeController">
    <children>
-      <Pane layoutX="-103.0" layoutY="-70.0" prefHeight="600.0" prefWidth="750.0">
+      <Pane layoutX="-103.0" layoutY="-70.0" prefHeight="450.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <SplitPane dividerPositions="0.5" layoutX="103.0" layoutY="69.0" prefHeight="530.0" prefWidth="647.0">
+            <SplitPane dividerPositions="0.38847117794486213" prefHeight="450.0" prefWidth="800.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
@@ -38,9 +38,11 @@
                         <Text fx:id="diretorFilme" layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diretor" />
                         <Text fx:id="atorPrincipalFilme" layoutX="14.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ator Principal" />
                         <Text fx:id="faixaEtariaFilme" layoutX="14.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faixa Etária" />
-                        <TextArea fx:id="descricaoFilme" layoutX="14.0" layoutY="227.0" prefHeight="200.0" prefWidth="289.0" text="Descrição&#10;" />
-                        <Button fx:id="btnAssistirFilme" layoutX="95.0" layoutY="466.0" mnemonicParsing="false" onAction="#assistirFilme" text="Assistir" />
-                        <Button layoutX="161.0" layoutY="466.0" mnemonicParsing="false" onAction="#cancelarFilme" text="Cancelar" />
+                        <TextArea fx:id="descricaoFilme" editable="false" layoutX="14.0" layoutY="227.0" prefHeight="145.0" prefWidth="458.0" text="Descrição&#10;" />
+                        <Button fx:id="btnAssistirFilme" layoutX="17.0" layoutY="401.0" mnemonicParsing="false" onAction="#assistirFilme" text="Assistir" />
+                        <Button layoutX="426.0" layoutY="401.0" mnemonicParsing="false" onAction="#cancelarFilme" text="Voltar" />
+                        <Button fx:id="editarFilmeBT" layoutX="79.0" layoutY="401.0" mnemonicParsing="false" onAction="#editarFilme" text="Editar" />
+                        <Button fx:id="removerFilmeBT" layoutX="130.0" layoutY="401.0" mnemonicParsing="false" onAction="#removerFilme" text="Remover" />
                      </children>
                   </AnchorPane>
               </items>

@@ -39,6 +39,7 @@ public class MainApp extends Application {
 			
 			Scene scene = new Scene(telaLogin);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);            
             primaryStage.show();
 			                      
             TelaLoginController controller = loader.getController();
@@ -60,6 +61,7 @@ public class MainApp extends Application {
 			
 			Scene scene = new Scene(telaCadastro);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);            
             primaryStage.show();
 			                      
             TelaCadastroFilmeController controller = loader.getController();
@@ -71,6 +73,51 @@ public class MainApp extends Application {
 		}
 	}
 	
+	public void mostraTelaEdicaoFilme(Filme filme) {
+		
+		try {
+			 // Carrega a tela de cadastro de filme
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroFilme.fxml"));					
+			telaCadastro = (Pane) loader.load();
+            TelaCadastroFilmeController controller = loader.getController();
+            controller.setMainApp(this);
+            
+            controller.setModoEdicao(filme);
+			Scene scene = new Scene(telaCadastro);
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);            
+            primaryStage.show();
+			                      
+
+            
+            
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void mostraTelaEdicaoUsuario(Usuario usuario) {
+		
+		try {
+			// Carrega a tela de cadastro de filme
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/TelaCadastroUsuario.fxml"));					
+			telaCadastro = (Pane) loader.load();
+			TelaCadastroUsuarioController controller = loader.getController();
+			controller.setMainApp(this);
+			
+			controller.setModoEdicao(usuario);
+			Scene scene = new Scene(telaCadastro);
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);            
+			primaryStage.show();
+				
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
+	
 	public void mostraTelaCadastroUsuario(){
 		
 		try {
@@ -81,6 +128,7 @@ public class MainApp extends Application {
 			
 			Scene scene = new Scene(telaCadastro);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);           
             primaryStage.show();
 			                      
             TelaCadastroUsuarioController controller = loader.getController();
@@ -102,6 +150,7 @@ public class MainApp extends Application {
 			
 			Scene scene = new Scene(telaInicial);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
             
             TelaHomeController controller = loader.getController();
@@ -124,6 +173,7 @@ public class MainApp extends Application {
 	        
 			Scene scene = new Scene(telaInfoFilmes);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);            
             primaryStage.show();
             
             controller.setMainApp(this);

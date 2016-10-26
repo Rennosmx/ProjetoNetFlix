@@ -98,4 +98,10 @@ public class TelaHomeController {
 		filmes = filmeRepository.buscarTudo();
 		updateFilmeTiles();
 	}
+	
+	@FXML
+	private void handleEditarUsuario() {
+		mainApp.mostraTelaEdicaoUsuario(MainApp.getUsuarioLogado());
+	}	
+	
 }

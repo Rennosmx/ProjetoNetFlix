@@ -1,12 +1,15 @@
 package view;
 
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.MainApp;
 import model.Usuario;
@@ -15,7 +18,7 @@ import persistence.UsuarioRepository;
 public class TelaCadastroUsuarioController {
 
 			
-	private MainApp loginApp;
+	private MainApp mainApp;
 	
 	@FXML
 	private TextField cadastroNome;
@@ -27,10 +30,13 @@ public class TelaCadastroUsuarioController {
 	private TextField cadastroEmail;
 	
 	@FXML
-	private TextField cadastroSenha;
+	private PasswordField cadastroSenha;
 	
-	
-	
+	@FXML
+	private Button cadastrarBT;
+		
+	private Usuario usuarioParaEdicao;
+		
 	@FXML
 	private void btnFinalizarCadastro(){
 		
@@ -58,7 +64,7 @@ public class TelaCadastroUsuarioController {
 			return;			
 		}		
 		
-		Usuario usuario = new Usuario();
+		Usuario usuario = usuarioParaEdicao == null ? new Usuario() : usuarioParaEdicao;		
 		usuario.setNome(cadastroNome.getText());
 		Date date = Date.from(cadastroIdade.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 		usuario.setDataNascimento(date);
@@ -68,37 +74,59 @@ public class TelaCadastroUsuarioController {
 		
 		UsuarioRepository usuarioRepository = new UsuarioRepository();
 		
-		if (usuarioRepository.buscar(usuario.getEmail()) != null ) {
+		Usuario usuarioExistente = usuarioRepository.buscar(usuario.getEmail());
+		if (usuarioExistente != null && usuarioExistente.getId() != usuario.getId()) {
 			JOptionPane.showMessageDialog(null, "Já existe uma conta com o email especificado.", 
 					"Erro", JOptionPane.ERROR_MESSAGE);
 			return;				
 		}
 		
-		usuarioRepository.incluir(usuario);
+		usuarioRepository.editarIncluir(usuario);
 		
-		JOptionPane.showMessageDialog(null, "Conta cadastrada com sucesso!", 
-				"Conta criada", JOptionPane.INFORMATION_MESSAGE);		
-		
-		try {
-			loginApp.mostraTelaLogin();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+		if (usuarioParaEdicao == null) {
+			JOptionPane.showMessageDialog(null, "Conta cadastrada com sucesso!", 
+					"Conta criada", JOptionPane.INFORMATION_MESSAGE);	
+			try {
+				mainApp.mostraTelaLogin();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else {
+			try {
+				mainApp.mostraTelaHome();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+		}
+
 		
 	}
 	
 	@FXML
 	private void btnCancelarCadastro(){
 		try {
-			loginApp.mostraTelaLogin();
+			if (usuarioParaEdicao == null) {
+				mainApp.mostraTelaLogin();
+			} else {
+				mainApp.mostraTelaHome();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	public void setMainApp(MainApp loginApp) {
-        this.loginApp = loginApp;    
+        this.mainApp = loginApp;    
     }
 		
-	
+	public void setModoEdicao(Usuario usuario) {
+		this.usuarioParaEdicao = usuario;
+		cadastrarBT.setText("Alterar");
+		cadastroNome.setText(usuario.getNome());
+		Date data = usuario.getDataNascimento();
+
+		cadastroIdade.setValue(Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+		cadastroEmail.setText(usuario.getEmail());
+		cadastroSenha.setText(usuario.getSenha());
+	}	
 }
