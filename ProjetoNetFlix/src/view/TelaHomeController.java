@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import model.Filme;
 import model.MainApp;
 import persistence.FilmeRepository;
+import util.DateUtil;
 
 public class TelaHomeController {
 
@@ -54,7 +55,11 @@ public class TelaHomeController {
 
     private void updateFilmeTiles() {
     	filmesTP.getChildren().clear();
+    	int idadeUsuarioLogado = DateUtil.calculateAge(MainApp.getUsuarioLogado().getDataNascimento());
     	for (Filme filme : filmes) {
+    		if (filme.getIdade() > idadeUsuarioLogado) { // se a classificacao etaria do filme for maior que a idade do usuario, nao exibe-o
+    			continue;
+    		}
 	        try {
 	        	FXMLLoader loader = new FXMLLoader();
 		        loader.setLocation(MainApp.class.getResource("/view/FilmeLayout.fxml"));
