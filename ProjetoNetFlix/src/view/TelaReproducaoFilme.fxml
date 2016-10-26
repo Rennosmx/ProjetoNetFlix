@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaReproducaoFilmeController">
+   <children>
+      <Pane prefHeight="450.0" prefWidth="800.0" style="-fx-background-color: #000000;">
+         <children>
+            <Button layoutX="397.0" layoutY="414.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+            <WebView fx:id="movieview" layoutX="58.0" layoutY="30.0" prefHeight="373.0" prefWidth="677.0" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
-

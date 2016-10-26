@@ -14,6 +14,7 @@ import view.TelaCadastroUsuarioController;
 import view.TelaHomeController;
 import view.TelaInformacoesFilmeController;
 import view.TelaLoginController;
+import view.TelaReproducaoFilmeController;
 
 public class MainApp extends Application {
 
@@ -199,5 +200,23 @@ public class MainApp extends Application {
 
 	public static void setUsuarioLogado(Usuario usuarioLogado) {
 		MainApp.usuarioLogado = usuarioLogado;
+	}
+
+	public void mostraTelaReproducaoFilme(Filme filme) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("/view/TelaReproducaoFilme.fxml"));					
+			Pane tela = (Pane) loader.load();
+            TelaReproducaoFilmeController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.initData(filme);		
+			Scene scene = new Scene(tela);
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);           
+			primaryStage.show();
+			controller.playMovie();              
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 }

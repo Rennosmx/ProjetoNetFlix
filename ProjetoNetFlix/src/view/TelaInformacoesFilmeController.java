@@ -64,7 +64,7 @@ public class TelaInformacoesFilmeController {
      
 	@FXML
 	private void assistirFilme(){
-		//mainApp.mostraTelaReproducaoFilme();
+		mainApp.mostraTelaReproducaoFilme(filme);
 	}
 
 	@FXML
