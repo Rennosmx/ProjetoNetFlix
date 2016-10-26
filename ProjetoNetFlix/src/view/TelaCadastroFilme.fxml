@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaCadastroFilmeController">
+<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaCadastroFilmeController">
    <children>
       <Pane prefHeight="332.0" prefWidth="412.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="9.0" layoutY="30.0" prefHeight="14.0" prefWidth="35.0" text="Título*:" />
+            <Label layoutX="9.0" layoutY="30.0" prefHeight="17.0" prefWidth="44.0" text="Título*:" />
             <Label layoutX="9.0" layoutY="64.0" text="Ano*:" />
             <Label layoutX="185.0" layoutY="64.0" prefHeight="14.0" prefWidth="113.0" text="Duração (minutos)*:" />
             <TextField fx:id="tituloTF" layoutX="110.0" layoutY="26.0" prefHeight="22.0" prefWidth="324.0" />
             <TextField fx:id="duracaoTF" layoutX="288.0" layoutY="60.0" prefHeight="22.0" prefWidth="60.0" />
-            <Button fx:id="cadastrarBT" layoutX="11.0" layoutY="414.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnFinalizarCadastro" prefWidth="65.0" text="Cadastrar" />
-            <Button layoutX="80.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnCancelarCadastro" text="Cancelar" />
+            <Button fx:id="cadastrarBT" layoutX="11.0" layoutY="414.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnFinalizarCadastro" prefHeight="25.0" prefWidth="69.0" text="Cadastrar" />
+            <Button layoutX="85.0" layoutY="414.0" mnemonicParsing="false" onAction="#btnCancelarCadastro" text="Cancelar" />
             <ImageView fx:id="capaIV" fitHeight="430.0" fitWidth="324.0" layoutX="462.0" layoutY="10.0" pickOnBounds="true" />
             <TextField fx:id="anoTF" layoutX="110.0" layoutY="60.0" prefHeight="22.0" prefWidth="60.0" />
-            <Button layoutX="337.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleSelectArquivoCapa" text="Adicionar capa..." />
+            <Button layoutX="334.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleSelectArquivoCapa" prefHeight="25.0" prefWidth="105.0" text="Adicionar capa..." />
             <Label layoutX="9.0" layoutY="96.0" prefHeight="14.0" prefWidth="52.0" text="Gênero*:" />
             <Label layoutX="9.0" layoutY="128.0" prefHeight="14.0" prefWidth="80.0" text="Diretor*:" />
             <TextField fx:id="diretorTF" layoutX="110.0" layoutY="124.0" prefHeight="22.0" prefWidth="324.0" />

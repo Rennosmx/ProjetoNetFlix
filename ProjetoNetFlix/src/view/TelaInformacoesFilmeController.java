@@ -102,6 +102,7 @@ public class TelaInformacoesFilmeController {
         capaIV.setImage(new Image("file:" + filme.getArquivoCapa()));	
         atorPrincipalFilme.setText(filme.getAtorPrincipal());
         diretorFilme.setText(filme.getDiretor());
+        faixaEtariaFilme.setText(filme.getIdade() + "");
         descricaoFilme.setText(filme.getDescricao());
         
     }
